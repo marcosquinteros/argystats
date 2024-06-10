@@ -14,3 +14,11 @@ export const getDolarBlue = async () => {
 //   const data = response.json()
   return response.data;
 };
+
+export const getDolares = async () => {
+  const response = await api.get('/dolares');
+  return response.data;
+};
+
+
+

@@ -1,19 +1,21 @@
 import { useState, useEffect } from "react";
-import { getDolarOficial } from "../utils/api";
+import { getDolarBlue, getDolarOficial } from "../utils/api";
 
-const DolarOficial = () => {
+const DolarBlue = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await getDolarOficial();
       setData(response);
+      setIsLoading(false);
     };
     fetchData();
   }, []);
 
-  if (!data) {
-    return <div>Cargando...</div>;
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
 
   return (
@@ -33,4 +35,4 @@ const DolarOficial = () => {
   );
 };
 
-export default DolarOficial;
+export default DolarBlue;

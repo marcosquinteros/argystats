@@ -7,13 +7,14 @@ const DolarBlue = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await getDolarBlue();
+      
       setData(response);
     };
     fetchData();
   }, []);
 
   if (!data) {
-    return <div>Cargando...</div>;
+    return <div>Loading...</div>;
   }
 
   return (
