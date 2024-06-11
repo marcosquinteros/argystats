@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { getDolares } from "../utils/api";
-import { Skeleton } from "@/components/ui/skeleton";
+import Slider from "react-slick";
+
 const Dolares = () => {
   const [data, setData] = useState(null);
- 
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await getDolares();
-
       setData(response);
     };
     fetchData();
@@ -17,11 +17,44 @@ const Dolares = () => {
     return <div>Loading...</div>;
   }
 
+  // Configuración de react-slick
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 5000, // Velocidad de desplazamiento
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 0, // No esperes entre deslizamientos
+    cssEase: "linear", // Efecto de transición lineal para un deslizamiento continuo
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
+
   return (
     <div className="container mx-auto py-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-
-      
+      <Slider {...settings}>
         {data.map((d, index) => (
           <div key={index} className="bg-white shadow-md rounded-lg p-6">
             <div className="flex gap-1 items-center">
@@ -38,12 +71,12 @@ const Dolares = () => {
                 <p className="font-bold text-2xl">${d.venta}</p>
               </div>
             </div>
-            <p className="text-sm text-gray-500">
+            {/* <p className="text-sm text-gray-500">
               Fecha de actualización: {d.fechaActualizacion}
-            </p>
+            </p> */}
           </div>
         ))}
-      </div>
+      </Slider>
     </div>
   );
 };

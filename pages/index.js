@@ -4,6 +4,10 @@ import DolarBlue from "@/components/DolarBlue";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import Dolares from "@/components/Dolars";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+import RiesgoPais from "@/components/RiesgoPais";
+import DataBcra from "@/components/DataBcra";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -20,7 +24,11 @@ export default function Home() {
           <Suspense fallback={<Skeleton />}>
             <DolarBlue />
           </Suspense>
+          <Suspense fallback={<Skeleton />}>
+            <RiesgoPais />
+          </Suspense>
         </div>
+        {/* <DataBcra/> */}
       </div>
           <Dolares/>
     </main>
